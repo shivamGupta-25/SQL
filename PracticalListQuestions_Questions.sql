@@ -146,7 +146,8 @@ SELECT society.SocName
 FROM society
 LEFT JOIN enrollment ON society.SocID = enrollment.SID
 GROUP BY society.SocID, society.TotalSeats
-HAVING COUNT(enrollment.RollNo) = 0.1 * society.TotalSeats;
+HAVING COUNT(enrollment.RollNo) = FLOOR(0.1 * society.TotalSeats);
+
 
 -- QUESTION 19
 
@@ -185,9 +186,9 @@ SELECT * FROM enrollment;
 CREATE VIEW SocietyEnrollments AS
 SELECT society.SocName, COUNT(enrollment.RollNo) AS "TotalEnrollment"
 FROM society
-INNER JOIN enrollment
+LEFT JOIN enrollment
 ON society.SocID = enrollment.SID
-GROUP BY enrollment.SID;
+GROUP BY society.SocID;
 
 SELECT * FROM SocietyEnrollments;
 
