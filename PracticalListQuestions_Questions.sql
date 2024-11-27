@@ -84,7 +84,7 @@ INNER JOIN enrollment
 ON society.SocID = enrollment.SID
 GROUP BY enrollment.SID
 ORDER BY COUNT(enrollment.RollNo)
-LIMIT 1;
+LIMIT 2;
 
 -- QUESTION 12
 
@@ -241,7 +241,7 @@ HAVING COUNT(enrollment.RollNo) >= 5;
 SELECT society.SocName, society.MentorName, TotalSeats, COUNT(enrollment.RollNo) As TotalEnrolled,
  (society.TotalSeats - COUNT(enrollment.RollNo)) AS UnfilledSeats
 FROM society
-INNER JOIN enrollment
+LEFT JOIN enrollment
 ON society.SocID = enrollment.SID
 GROUP BY society.SocID;
 
